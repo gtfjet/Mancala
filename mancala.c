@@ -1,18 +1,17 @@
 
 #include <windows.h>
 
-/* Game Board (player A vs player B) */
-int M[14], N, WT[7]={0};
+/* Game Board */
+int M[14], N;
 
 /* Helper Functions */
 void draw_board(int x) {
   system("cls");
-	printf("~~~~~~ Mancala ~~~~~~\n\n");
-  if(x==-1) printf("       Computer: hmm\n\n");
-  else if(x) printf("       Computer: %i\n\n",x);
-  else printf("\n\n");
+	printf("~~~~~~ Mancala ~~~~~~\n");
+  if(x==-1) printf("       Computer: hmm\n");
+  else if(x) printf("       Computer: %i\n",x);
+  else printf("\n");
   printf("%i\n",N);
-  //%i %i %i %i %i %i \n
   printf("\
  --------------------     \n\
   %2i %2i %2i %2i %2i %2i \n\
@@ -20,7 +19,6 @@ void draw_board(int x) {
   %2i %2i %2i %2i %2i %2i \n\
  --------------------     \n\n\
    6  5  4  3  2  1       \n\n",\
-  //WT[1],WT[2],WT[3],WT[4],WT[5],WT[6],
   M[8],M[9],M[10],M[11],M[12],M[13],\
   M[7],M[0],\
   M[6],M[5],M[4],M[3],M[2],M[1]);
@@ -87,12 +85,10 @@ void check_win() {
   getch();
 }
 
-
 int simulate_future(int W[7]) {
   int i,j,k, Mo[14]={0}, Wo[7]={0};
   // store original board
   for(i=0;i<14;i++) Mo[i]=M[i];
-  
   // try each move to completion
   for(j=1;j<=6;j++) {
     if(move(j,7,0)==7) simulate_future(Wo);
@@ -139,7 +135,6 @@ void move_computer() {
     }    
     // call the AI
     u=simulate_future(W);
-    for(i=0;i<7;i++) WT[i]=W[i];
     k=move(u,7,1);
   }
 }
